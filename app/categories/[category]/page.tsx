@@ -19,9 +19,7 @@ type Props = {
   params: {
     category: string
   }
-  searchParams: {
-    page?: string
-  }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
