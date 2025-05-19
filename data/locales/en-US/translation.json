@@ -25,5 +25,10 @@
   },
   "common": {
     "loading": "Loading..."
+  },
+  "categories": {
+    "browseCollection": "Browse our collection of {{category}} action figure news, reviews, and announcements.",
+    "noPostsFound": "No posts found in this category",
+    "checkBackSoon": "Check back soon for new content!"
   }
 }
