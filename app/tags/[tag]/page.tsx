@@ -133,7 +133,7 @@ export default async function TagPage({ params, searchParams }: Props) {
                     </div>
                   </Link>
                   <CardHeader className="p-4">
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <Link href={`/categories/${post.category.toLowerCase().replace(/\s+/g, "-")}`}>
                         <Badge className="bg-secondary text-background hover:bg-secondary/90">{post.category}</Badge>
                       </Link>

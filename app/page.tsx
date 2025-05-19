@@ -123,7 +123,7 @@ export default async function Home() {
                   </div>
                 </Link>
                 <CardHeader className="p-4">
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <Link href={`/categories/${post.category.toLowerCase().replace(/\s+/g, "-")}`}>
                       <Badge className="bg-secondary text-background hover:bg-secondary/90">{post.category}</Badge>
                     </Link>
@@ -223,7 +223,7 @@ export default async function Home() {
                   </div>
                 </Link>
                 <CardHeader className="p-4">
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="outline" className="border-accent text-accent badge-glow-accent">
                         New Release

@@ -123,7 +123,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
                     </div>
                   </Link>
                   <CardHeader className="p-4">
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <Badge className="bg-secondary text-background">{post.category}</Badge>
                       <Link href={`/posts/${post.slug}`}>
                         <CardTitle className="line-clamp-2 hover:underline">{post.title}</CardTitle>
