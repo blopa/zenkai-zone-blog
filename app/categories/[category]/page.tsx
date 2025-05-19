@@ -24,7 +24,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Convert kebab-case to title case for display
-  const categoryTitle = params.category
+  const categoryTitle = await params.category
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ")
@@ -50,7 +50,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   const postsPerPage = 9
 
   // Convert URL-friendly format back to the category name format in our data
-  const categoryParam = params.category
+  const categoryParam = await params.category
   const decodedCategoryParam = categoryParam.replace(/-/g, " ")
 
   // Get the actual category name with proper casing

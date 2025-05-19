@@ -35,6 +35,20 @@
     "allPosts": "All Posts",
     "browseAll": "Browse all our action figure news, reviews, and announcements."
   },
+  "tags": {
+    "allTags": "All Tags",
+    "browseAll": "Browse all content tags on Zenkai Zone Blog.",
+    "post": "post",
+    "posts": "posts",
+    "viewPostsTagged": "View all posts tagged with \"{{tag}}\""
+  },
+  "tag": {
+    "postsTagged": "Posts Tagged: {{tag}}",
+    "browsePostsTagged": "Browse all posts tagged with \"{{tag}}\" on Zenkai Zone Blog.",
+    "noPostsFound": "No posts found with this tag",
+    "checkBackSoon": "Check back soon for new content!",
+    "browseAllPosts": "Browse All Posts"
+  },
   "post": {
     "rating": "Rating: {{rating}}",
     "relatedPosts": "Related Posts",
