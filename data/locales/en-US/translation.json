@@ -54,5 +54,38 @@
     "relatedPosts": "Related Posts",
     "sharePost": "Share this post",
     "copyLink": "Copy Link"
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "first": "Your premier source for",
+        "highlight": "action figure",
+        "last": "news"
+      },
+      "description": "The latest reviews, insights, and announcements on high-end action figures including SH Figuarts, Figma, and more.",
+      "buttons": {
+        "reviews": "Latest Reviews",
+        "newReleases": "New Releases"
+      }
+    },
+    "featured": {
+      "title": "Featured"
+    },
+    "recentPosts": {
+      "title": "Recent Posts"
+    },
+    "categories": {
+      "title": "Browse by Category"
+    },
+    "newReleases": {
+      "title": "New Releases",
+      "badge": "New Release"
+    },
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "description": "Get the latest news, reviews, and exclusive content delivered straight to your inbox.",
+      "emailPlaceholder": "Enter your email",
+      "subscribeButton": "Subscribe"
+    }
   }
 }
