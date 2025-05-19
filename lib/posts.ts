@@ -1,6 +1,3 @@
-// This is a mock implementation that would be replaced with actual data fetching
-// from a CMS, markdown files, or other data source in a real application
-
 export type Post = {
   slug: string
   title: string
