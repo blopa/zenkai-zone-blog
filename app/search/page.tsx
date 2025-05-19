@@ -18,11 +18,11 @@ interface SearchPageProps {
 }
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-  const query = searchParams.q || ""
+  const query = await searchParams.q || ""
   const currentPage = Number(searchParams.page) || 1
-  const selectedCategory = searchParams.category || ""
-  const selectedTag = searchParams.tag || ""
-  const viewMode = searchParams.view || "grid"
+  const selectedCategory = await searchParams.category || ""
+  const selectedTag = await searchParams.tag || ""
+  const viewMode = await searchParams.view || "grid"
   const resultsPerPage = 9
 
   // Get all posts and filter based on search parameters
