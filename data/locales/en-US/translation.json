@@ -34,5 +34,11 @@
   "posts": {
     "allPosts": "All Posts",
     "browseAll": "Browse all our action figure news, reviews, and announcements."
+  },
+  "post": {
+    "rating": "Rating: {{rating}}",
+    "relatedPosts": "Related Posts",
+    "sharePost": "Share this post",
+    "copyLink": "Copy Link"
   }
 }
