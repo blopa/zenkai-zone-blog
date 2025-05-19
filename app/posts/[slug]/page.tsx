@@ -23,7 +23,7 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug)
+  const post = await getPostBySlug(await params.slug)
 
   if (!post) {
     return {
@@ -69,7 +69,7 @@ export async function generateStaticParams() {
 import PostPageClient from './post-page-client';
 
 export default async function PostPage({ params }: Props) {
-  const post = await getPostBySlug(params.slug)
+  const post = await getPostBySlug(await params.slug)
 
   if (!post) {
     notFound()

@@ -83,53 +83,11 @@ export default function PostPageClient({ post, categorySlug, relatedPosts }: Pos
       </div>
 
       <div className="prose prose-gray dark:prose-invert max-w-none">
-        {/* In a real app, this would be rendered markdown/MDX content */}
+        {/* Display the excerpt as a lead paragraph */}
         <p className="lead">{post.excerpt}</p>
-        <p>
-          {t('post.placeholderContent')}
-        </p>
-        <p>
-          {t('post.placeholderExample')}
-        </p>
-        <h2>{t('post.productDetails')}</h2>
-        <p>
-          {t('post.productDescription')}
-        </p>
-        <h3>{t('post.whatsInTheBox')}:</h3>
-        <ul>
-          <li>{t('post.boxItems.figure')}</li>
-          <li>{t('post.boxItems.hands')}</li>
-          <li>{t('post.boxItems.faceplates')}</li>
-          <li>{t('post.boxItems.effects')}</li>
-          <li>{t('post.boxItems.stand')}</li>
-        </ul>
-        <h2>{t('post.articulation')}</h2>
-        <p>
-          {t('post.articulationDetails')}
-        </p>
-        <h2>{t('post.paintAndSculpt')}</h2>
-        <p>
-          {t('post.paintDetails')}
-        </p>
-        <h2>{t('post.finalThoughts')}</h2>
-        <p>
-          {t('post.conclusion')}
-        </p>
-        <h3>{t('post.pros')}:</h3>
-        <ul>
-          <li>{t('post.prosList.articulation')}</li>
-          <li>{t('post.prosList.detail')}</li>
-          <li>{t('post.prosList.materials')}</li>
-          <li>{t('post.prosList.accessories')}</li>
-        </ul>
-        <h3>{t('post.cons')}:</h3>
-        <ul>
-          <li>{t('post.consList.price')}</li>
-          <li>{t('post.consList.smallParts')}</li>
-        </ul>
-        <p>
-          <strong>{t('post.rating', { rating: '9/10' })}</strong> - {t('post.ratingExplanation')}
-        </p>
+        
+        {/* Render the HTML content from the markdown file */}
+        <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </div>
 
       <div className="flex flex-wrap gap-2">
