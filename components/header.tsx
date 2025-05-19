@@ -1,4 +1,7 @@
-import Link from "next/link"
+"use client";
+
+import Link from "next/link";
+import { useTranslation } from 'react-i18next';
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -7,6 +10,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 
 export default function Header() {
+  const { t } = useTranslation();
   return (
       <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between py-4">
@@ -30,31 +34,31 @@ export default function Header() {
                 </div>
                 <nav className="flex flex-col gap-4">
                   <Link href="/" className="text-lg font-semibold text-primary hover:text-secondary transition-colors">
-                    Home
+                    {t('nav.home')}
                   </Link>
                   <Link
                       href="/categories/sh-figuarts"
                       className="text-lg font-semibold hover:text-secondary transition-colors"
                   >
-                    SH Figuarts
+                    {t('nav.shFiguarts')}
                   </Link>
                   <Link href="/categories/figma" className="text-lg font-semibold hover:text-secondary transition-colors">
-                    Figma
+                    {t('nav.figma')}
                   </Link>
                   <Link href="/categories/mafex" className="text-lg font-semibold hover:text-secondary transition-colors">
-                    MAFEX
+                    {t('nav.mafex')}
                   </Link>
                   <Link
                       href="/categories/revoltech"
                       className="text-lg font-semibold hover:text-secondary transition-colors"
                   >
-                    Revoltech
+                    {t('nav.revoltech')}
                   </Link>
                   <Link href="/about" className="text-lg font-semibold hover:text-secondary transition-colors">
-                    About
+                    {t('nav.about')}
                   </Link>
                   <Link href="/contact" className="text-lg font-semibold hover:text-secondary transition-colors">
-                    Contact
+                    {t('nav.contact')}
                   </Link>
                 </nav>
               </SheetContent>
@@ -71,25 +75,25 @@ export default function Header() {
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/" className="text-sm font-medium transition-colors hover:text-secondary">
-              Home
+              {t('nav.home')}
             </Link>
             <Link href="/categories/sh-figuarts" className="text-sm font-medium transition-colors hover:text-secondary">
-              SH Figuarts
+              {t('nav.shFiguarts')}
             </Link>
             <Link href="/categories/figma" className="text-sm font-medium transition-colors hover:text-secondary">
-              Figma
+              {t('nav.figma')}
             </Link>
             <Link href="/categories/mafex" className="text-sm font-medium transition-colors hover:text-secondary">
-              MAFEX
+              {t('nav.mafex')}
             </Link>
             <Link href="/categories/revoltech" className="text-sm font-medium transition-colors hover:text-secondary">
-              Revoltech
+              {t('nav.revoltech')}
             </Link>
             <Link href="/about" className="text-sm font-medium transition-colors hover:text-secondary">
-              About
+              {t('nav.about')}
             </Link>
             <Link href="/contact" className="text-sm font-medium transition-colors hover:text-secondary">
-              Contact
+              {t('nav.contact')}
             </Link>
           </nav>
           <div className="flex items-center gap-2">
@@ -98,14 +102,14 @@ export default function Header() {
               <Input
                   type="search"
                   name="q"
-                  placeholder="Search..."
+                  placeholder={t('search.placeholder')}
                   className="w-[200px] pl-8 bg-muted border-primary/20 focus:border-secondary"
               />
             </form>
             <Button variant="ghost" size="icon" className="md:hidden text-primary hover:text-primary/80" asChild>
               <Link href="/search">
                 <Search className="h-5 w-5" />
-                <span className="sr-only">Search</span>
+                <span className="sr-only">{t('search.title')}</span>
               </Link>
             </Button>
             <ModeToggle />

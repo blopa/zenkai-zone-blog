@@ -1,0 +1,29 @@
+{
+  "site": {
+    "title": "Zenkai Zone Blog",
+    "description": "Your premier source for action figure news, reviews, and announcements."
+  },
+  "nav": {
+    "home": "Home",
+    "posts": "Posts",
+    "categories": "Categories",
+    "tags": "Tags",
+    "shFiguarts": "SH Figuarts",
+    "figma": "Figma",
+    "mafex": "MAFEX",
+    "revoltech": "Revoltech",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "readMore": "Read More",
+    "viewAll": "View All"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search..."
+  },
+  "common": {
+    "loading": "Loading..."
+  }
+}
