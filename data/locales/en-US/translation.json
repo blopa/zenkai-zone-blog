@@ -21,7 +21,20 @@
   },
   "search": {
     "title": "Search",
-    "placeholder": "Search..."
+    "placeholder": "Search...",
+    "description": "Find action figure news, reviews, and announcements",
+    "inputPlaceholder": "Search for action figures, reviews, news...",
+    "button": "Search",
+    "popular": "Popular",
+    "result": "result",
+    "results": "results",
+    "for": "for",
+    "filters": "Filters",
+    "gridView": "Grid view",
+    "listView": "List view",
+    "popularTags": "Popular Tags",
+    "noResultsTitle": "No results found",
+    "noResultsMessage": "We couldn't find any posts matching your search. Try using different keywords or removing filters."
   },
   "common": {
     "loading": "Loading..."
