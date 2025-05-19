@@ -5,6 +5,7 @@ date: "2023-05-15"
 coverImage: "/placeholder.svg?height=600&width=1200"
 excerpt: "An in-depth look at the latest Ultra Instinct Goku figure from Bandai's premium SH Figuarts line."
 category: "SH Figuarts"
+language: "en-US"
 tags: ["dragon ball", "review", "sh figuarts"]
 author:
   name: "John Collector"

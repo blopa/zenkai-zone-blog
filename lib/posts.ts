@@ -1,3 +1,9 @@
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import { remark } from 'remark'
+import html from 'remark-html'
+
 export type Post = {
   slug: string
   title: string
@@ -6,6 +12,7 @@ export type Post = {
   excerpt: string
   content: string
   category: string
+  language?: string
   tags: string[]
   author: {
     name: string
@@ -13,250 +20,202 @@ export type Post = {
   }
 }
 
-const posts: Post[] = [
-  {
-    slug: "sh-figuarts-goku-ultra-instinct-review",
-    title: "SH Figuarts Dragon Ball Super Son Goku Ultra Instinct Review",
-    date: "2023-05-15",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "An in-depth look at the latest Ultra Instinct Goku figure from Bandai's premium SH Figuarts line.",
-    content: "Full review content would go here...",
-    category: "SH Figuarts",
-    tags: ["dragon ball", "review", "sh figuarts"],
-    author: {
-      name: "John Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "figma-link-breath-of-the-wild-announcement",
-    title: "Good Smile Announces New Figma Link from Breath of the Wild",
-    date: "2023-05-10",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "Good Smile Company reveals a new Figma figure of Link based on The Legend of Zelda: Breath of the Wild.",
-    content: "Full announcement content would go here...",
-    category: "Figma",
-    tags: ["zelda", "new-release", "figma", "good smile company"],
-    author: {
-      name: "Sarah Reviewer",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "mafex-batman-hush-black-version-review",
-    title: "MAFEX Batman (Hush) Black Version Review",
-    date: "2023-05-05",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "We take a detailed look at Medicom's latest Batman figure from the popular Hush storyline.",
-    content: "Full review content would go here...",
-    category: "MAFEX",
-    tags: ["batman", "dc comics", "review", "mafex"],
-    author: {
-      name: "Mike Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "revoltech-deadpool-review",
-    title: "Amazing Yamaguchi Revoltech Deadpool Review",
-    date: "2023-04-28",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "Is this the most posable Deadpool figure ever made? We find out in our comprehensive review.",
-    content: "Full review content would go here...",
-    category: "Revoltech",
-    tags: ["marvel", "deadpool", "review", "revoltech"],
-    author: {
-      name: "John Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "sh-figuarts-demon-slayer-nezuko-announced",
-    title: "Bandai Announces SH Figuarts Nezuko from Demon Slayer",
-    date: "2023-04-20",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "Bandai expands their Demon Slayer lineup with a highly articulated Nezuko figure.",
-    content: "Full announcement content would go here...",
-    category: "SH Figuarts",
-    tags: ["demon slayer", "anime", "new-release", "sh figuarts"],
-    author: {
-      name: "Sarah Reviewer",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "figma-spider-man-no-way-home-review",
-    title: "Figma Spider-Man (No Way Home Version) Review",
-    date: "2023-04-15",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt:
-      "Good Smile Company's take on the integrated suit from Spider-Man: No Way Home is here, and it's impressive.",
-    content: "Full review content would go here...",
-    category: "Figma",
-    tags: ["spider-man", "marvel", "review", "figma"],
-    author: {
-      name: "Mike Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "mafex-the-batman-2022-announced",
-    title: "MAFEX Reveals The Batman (2022) Figure",
-    date: "2023-04-10",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "Medicom unveils their upcoming figure based on Robert Pattinson's portrayal of the Dark Knight.",
-    content: "Full announcement content would go here...",
-    category: "MAFEX",
-    tags: ["batman", "dc comics", "new-release", "mafex"],
-    author: {
-      name: "John Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "revoltech-all-might-my-hero-academia-review",
-    title: "Amazing Yamaguchi Revoltech All Might Review",
-    date: "2023-04-05",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "The Symbol of Peace gets the Revoltech treatment. Does this figure do the character justice?",
-    content: "Full review content would go here...",
-    category: "Revoltech",
-    tags: ["my hero academia", "anime", "review", "revoltech"],
-    author: {
-      name: "Sarah Reviewer",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "sh-figuarts-mandalorian-beskar-armor-review",
-    title: "SH Figuarts The Mandalorian (Beskar Armor) Review",
-    date: "2023-03-28",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "Bandai's premium take on Din Djarin in his iconic Beskar armor is a must-have for Star Wars collectors.",
-    content: "Full review content would go here...",
-    category: "SH Figuarts",
-    tags: ["star wars", "mandalorian", "review", "sh figuarts"],
-    author: {
-      name: "Mike Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "figma-demon-slayer-tanjiro-review",
-    title: "Figma Demon Slayer: Tanjiro Kamado Review",
-    date: "2023-03-20",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "Good Smile Company's Tanjiro figure captures the essence of the Demon Slayer protagonist perfectly.",
-    content: "Full review content would go here...",
-    category: "Figma",
-    tags: ["demon slayer", "anime", "review", "figma"],
-    author: {
-      name: "John Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "mafex-spider-man-into-the-spider-verse-announced",
-    title: "MAFEX Announces Spider-Man: Into the Spider-Verse Miles Morales",
-    date: "2023-03-15",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "Medicom is bringing the animated Miles Morales to their MAFEX line with impressive attention to detail.",
-    content: "Full announcement content would go here...",
-    category: "MAFEX",
-    tags: ["spider-man", "marvel", "new-release", "mafex"],
-    author: {
-      name: "Sarah Reviewer",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-  {
-    slug: "revoltech-evangelion-unit-01-review",
-    title: "Revoltech Evangelion Unit-01 Review",
-    date: "2023-03-10",
-    coverImage: "/placeholder.svg?height=600&width=1200",
-    excerpt: "The iconic EVA-01 gets the Revoltech treatment with incredible articulation and accessories.",
-    content: "Full review content would go here...",
-    category: "Revoltech",
-    tags: ["evangelion", "anime", "review", "revoltech"],
-    author: {
-      name: "Mike Collector",
-      picture: "/placeholder.svg?height=100&width=100",
-    },
-  },
-]
+// Directory structure: data/blog/[year]/[slug].md
+const blogDirectory = path.join(process.cwd(), 'data/blog')
 
-export async function getAllPosts(): Promise<Post[]> {
-  // Sort posts by date (newest first)
-  return [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+// Get all years directories
+const getYearDirectories = (): string[] => {
+  try {
+    if (!fs.existsSync(blogDirectory)) {
+      return []
+    }
+    return fs.readdirSync(blogDirectory, { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory())
+      .map(dirent => dirent.name)
+  } catch (error) {
+    console.error('Error reading blog directories:', error)
+    return []
+  }
 }
 
+// Get markdown files from all year directories
+const getMarkdownFiles = (): string[] => {
+  const years = getYearDirectories()
+  let markdownFiles: string[] = []
+  
+  years.forEach(year => {
+    const yearDir = path.join(blogDirectory, year)
+    try {
+      const files = fs.readdirSync(yearDir)
+        .filter(file => file.endsWith('.md'))
+        .map(file => path.join(year, file))
+      
+      markdownFiles = [...markdownFiles, ...files]
+    } catch (error) {
+      console.error(`Error reading files from ${yearDir}:`, error)
+    }
+  })
+  
+  return markdownFiles
+}
+
+// Parse markdown content into HTML
+async function markdownToHtml(markdown: string): Promise<string> {
+  const result = await remark()
+    .use(html)
+    .process(markdown)
+  return result.toString()
+}
+
+// Get post data from markdown file
+async function getPostFromFile(filePath: string): Promise<Post> {
+  const fullPath = path.join(blogDirectory, filePath)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const { data, content } = matter(fileContents)
+  
+  // Convert markdown to HTML
+  const htmlContent = await markdownToHtml(content)
+  
+  return {
+    slug: data.slug,
+    title: data.title,
+    date: data.date,
+    coverImage: data.coverImage,
+    excerpt: data.excerpt,
+    content: htmlContent,
+    category: data.category,
+    language: data.language || 'en-US',
+    tags: data.tags || [],
+    author: {
+      name: data.author?.name || 'Anonymous',
+      picture: data.author?.picture || '/placeholder.svg?height=100&width=100',
+    }
+  }
+}
+
+// Cache posts to avoid reading files multiple times
+let _posts: Post[] | null = null
+
+/**
+ * Get all blog posts from markdown files
+ */
+export async function getAllPosts(): Promise<Post[]> {
+  if (_posts) return _posts
+  
+  const filePaths = getMarkdownFiles()
+  const postsPromises = filePaths.map(filePath => getPostFromFile(filePath))
+  _posts = await Promise.all(postsPromises)
+  
+  // Sort posts by date (newest first)
+  return _posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
+
+/**
+ * Get a single post by its slug
+ */
 export async function getPostBySlug(slug: string): Promise<Post | undefined> {
+  const posts = await getAllPosts()
   return posts.find((post) => post.slug === slug)
 }
 
+/**
+ * Get all posts for a specific category
+ */
 export async function getPostsByCategory(category: string): Promise<Post[]> {
-  return posts
-    .filter((post) => post.category.toLowerCase() === category.toLowerCase())
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const posts = await getAllPosts()
+  return posts.filter(
+    (post) => post.category.toLowerCase() === category.toLowerCase()
+  )
 }
 
+/**
+ * Get all unique categories from posts
+ */
 export async function getCategories(): Promise<string[]> {
-  const categories = new Set(posts.map((post) => post.category))
-  return Array.from(categories)
+  const posts = await getAllPosts()
+  return [...new Set(posts.map((post) => post.category))]
 }
 
+/**
+ * Get all unique tags across all posts
+ */
 export async function getAllTags(): Promise<string[]> {
-  const tagsSet = new Set<string>()
-  posts.forEach((post) => {
-    post.tags.forEach((tag) => tagsSet.add(tag))
-  })
-  return Array.from(tagsSet)
+  const posts = await getAllPosts()
+  const allTags = posts.flatMap((post) => post.tags)
+  return [...new Set(allTags)]
 }
 
+/**
+ * Get all posts with a specific tag
+ */
 export async function getPostsByTag(tag: string): Promise<Post[]> {
-  return posts
-    .filter((post) => post.tags.some((t) => t.toLowerCase() === tag.toLowerCase()))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const posts = await getAllPosts()
+  return posts.filter((post) =>
+    post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+  )
 }
 
+/**
+ * Get count of posts for each tag
+ */
 export async function getTagCounts(): Promise<Record<string, number>> {
+  const posts = await getAllPosts()
+  const allTags = posts.flatMap((post) => post.tags)
   const tagCounts: Record<string, number> = {}
 
-  posts.forEach((post) => {
-    post.tags.forEach((tag) => {
-      if (tagCounts[tag]) {
-        tagCounts[tag]++
-      } else {
-        tagCounts[tag] = 1
-      }
-    })
+  allTags.forEach((tag) => {
+    if (tagCounts[tag]) {
+      tagCounts[tag]++
+    } else {
+      tagCounts[tag] = 1
+    }
   })
 
   return tagCounts
 }
 
-export async function getRelatedPosts(currentPost: Post, limit = 3): Promise<Post[]> {
-  // Find posts that share tags or are in the same category, excluding the current post
-  const relatedPosts = posts.filter(
+/**
+ * Get posts related to the current post based on shared tags
+ */
+export async function getRelatedPosts(
+  currentPost: Post,
+  limit = 3
+): Promise<Post[]> {
+  const posts = await getAllPosts()
+  
+  // First, get posts that share at least one tag with the current post
+  const postsWithSharedTags = posts.filter(
     (post) =>
       post.slug !== currentPost.slug &&
-      (post.category === currentPost.category || post.tags.some((tag) => currentPost.tags.includes(tag))),
+      post.tags.some((tag) => currentPost.tags.includes(tag))
   )
 
-  // Sort by relevance (number of matching tags)
-  relatedPosts.sort((a, b) => {
-    const aMatchingTags = a.tags.filter((tag) => currentPost.tags.includes(tag)).length
-    const bMatchingTags = b.tags.filter((tag) => currentPost.tags.includes(tag)).length
+  // If we have more posts than the limit, sort by number of shared tags
+  if (postsWithSharedTags.length > limit) {
+    return postsWithSharedTags
+      .sort((a, b) => {
+        const aSharedTags = a.tags.filter((tag) =>
+          currentPost.tags.includes(tag)
+        ).length
+        const bSharedTags = b.tags.filter((tag) =>
+          currentPost.tags.includes(tag)
+        ).length
+        return bSharedTags - aSharedTags
+      })
+      .slice(0, limit)
+  }
 
-    // If matching tags are equal, prioritize same category
-    if (aMatchingTags === bMatchingTags) {
-      if (a.category === currentPost.category && b.category !== currentPost.category) return -1
-      if (a.category !== currentPost.category && b.category === currentPost.category) return 1
-      return new Date(b.date).getTime() - new Date(a.date).getTime() // Then by date
-    }
+  // If we don't have enough related posts, find posts in the same category
+  if (postsWithSharedTags.length < limit) {
+    const postsInSameCategory = posts.filter(
+      (post) =>
+        post.slug !== currentPost.slug &&
+        !postsWithSharedTags.some(p => p.slug === post.slug) &&
+        post.category === currentPost.category
+    )
 
-    return bMatchingTags - aMatchingTags // Sort by number of matching tags
-  })
+    return [...postsWithSharedTags, ...postsInSameCategory].slice(0, limit)
+  }
 
-  return relatedPosts.slice(0, limit)
+  return postsWithSharedTags
 }
